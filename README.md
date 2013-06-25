@@ -1,5 +1,7 @@
-gps_simple -- A very simple utility to read gps information
-===========================================================
+gps_simple 
+==========
+A very simple utility to read gps information
+=============================================
 
 Author
 -------					
@@ -16,7 +18,7 @@ realtime clocks.
 
 Copyright
 ---------
-Open-Source via GPL
+Open-Source via GPL2
 
 
 Introduction
