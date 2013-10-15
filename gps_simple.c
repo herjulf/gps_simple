@@ -24,7 +24,7 @@
 #include "devtag-allinone.h"
 
 #define BUFLEN  124
-#define VERSION "1.0 2013-06-25"
+#define VERSION "1.1 2013-10-15"
 #define KNOT_TO_KMPH 1.852 
 
 
@@ -33,16 +33,18 @@ int debug = 0;
 int set_time = 0;
 int time_mode = 0;
 int velocity_mode = 0;
+int position_mode = 0;
 
 void usage (void)
 {
-  printf("\nnmea_light  [-h ] [-t ] [-s] [-v] nmea-input \n");
+  printf("\nnmea_light  [-h ] [-t ] [-s] [-v] [-p] nmea-input \n");
   printf("Version %s ", VERSION);
   printf("Options:\n");
   printf(" -h   help\n");
   printf(" -t   get time\n");
   printf(" -s   set time\n");
   printf(" -v   get velocity\n");
+  printf(" -p   get position\n");
   printf(" -d   debug\n");
 }
 
@@ -151,7 +153,7 @@ int main(int ac, char **av)
   int done = 0;
   int fd;
 
-  while ((op = getopt(ac, av,"dhtsv")) != EOF)
+  while ((op = getopt(ac, av,"dhtsvp")) != EOF)
     switch (op)  {
       /* specify an alternate server */
       
@@ -162,6 +164,9 @@ int main(int ac, char **av)
       break;
       
     case 'v':       velocity_mode=1;
+      break;
+
+    case 'p':       position_mode=1;
       break;
 
     case 'd':       debug=1;
@@ -228,6 +233,11 @@ int main(int ac, char **av)
 	
 	if( velocity_mode) {
 	  printf("Speed=%6.2f\n", speed * KNOT_TO_KMPH);
+	  done = 1;
+	}
+
+	if( position_mode) {
+	  printf("Lon=%f Lat=%f\n", lat/100, longi/100);
 	  done = 1;
 	}
 
