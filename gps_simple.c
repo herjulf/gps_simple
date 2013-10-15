@@ -237,7 +237,7 @@ int main(int ac, char **av)
 	}
 
 	if( position_mode) {
-	  printf("Lon=%f Lat=%f\n", lat/100, longi/100);
+	  printf("LON=%f LAT=%f\n", lat/100, longi/100);
 	  done = 1;
 	}
 

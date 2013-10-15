@@ -38,6 +38,10 @@ gpsctl  -n -s 4800 /dev/ttyUSB0
 gps_simple -v /dev/ttyUSB0 
 Speed=  1.04
 
+# Get position
+gps_simple -p /dev/ttyUSB0 
+LON=59.510566 LAT=17.368765
+
 # Get time
 gps_simple -t /dev/ttyUSB0 
 20110821 18:54.19
