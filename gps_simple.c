@@ -243,7 +243,7 @@ int main(int ac, char **av)
 	    lat = -lat;
 
 	  longi = longi/100;
-	  if(ew == 'E')
+	  if(ew == 'W')
 	    longi = -longi;
 	  
 	  printf("LAT=%f LON=%f\n", lat, longi);
