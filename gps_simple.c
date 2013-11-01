@@ -146,7 +146,7 @@ struct {
 int main(int ac, char **av)
 {
   float longi, lat, course, speed;
-  char foo[6], buf[BUFLEN], ns[1], ew[1];
+  char foo[6], buf[BUFLEN], ns, ew;
   char valid;
   int op, try, res, maxtry = 20;
   unsigned int year, mon, day, hour, min, sec;
@@ -227,7 +227,7 @@ int main(int ac, char **av)
       
       res = sscanf(buf, 
 		   "$GPRMC,%2d%2d%2d.%3c,%1c,%f,%1c,%f,%1c,%f,%f,%2d%2d%2d",
-		   &hour, &min, &sec, foo, &valid, &lat, ns,  &longi, ew, &speed, &course, &day, &mon, &year);
+		   &hour, &min, &sec, foo, &valid, &lat, &ns,  &longi, &ew, &speed, &course, &day, &mon, &year);
       
       if(res == 14 && valid == 'A') {
 	
@@ -237,12 +237,17 @@ int main(int ac, char **av)
 	}
 
 	if( position_mode) {
+
 	  lat = lat/100;
-	  if(ns[1] == 'S')
+	  if(ns == 'S')
 	    lat = -lat;
 
-	  if(ew[1] == 'E')
+	  longi = longi/100;
+	  if(ew == 'E')
 	    longi = -longi;
+	  
+	  printf("NS=%c, EW=%c\n", ns, ew);
+
 	  printf("LON=%f LAT=%f\n", lat, longi);
 	  done = 1;
 	}
@@ -332,5 +337,12 @@ Positive latitudes are north of the equator, negative latitudes are south of the
 equator. Positive longitudes are east of Prime Meridian, negative longitudes are 
 west of the Prime Meridian. Latitude and longitude are usually expressed in that 
 sequence, latitude before longitude.
+
+Bunda Tanzania gps,
+
+$GPRMC,090409.000,A,0201.7783,S,03351.5142,E,0.53,98.53,011113,,*26
+$GPGGA,090410.000,0201.7782,S,03351.5138,E,1,09,0.9,1199.2,M,-15.6,M,,0000*52
+$GPGSA,A,3,29,22,12,25,31,14,15,21,18,,,,1.6,0.9,1.3*38
+$GPRMC,090410.000,A,0201.7782,S,03351.5138,E,0.78,276.26,011113,,*1B
 
 */
