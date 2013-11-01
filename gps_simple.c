@@ -146,7 +146,7 @@ struct {
 int main(int ac, char **av)
 {
   float longi, lat, course, speed;
-  char foo[6], buf[BUFLEN], c[1];
+  char foo[6], buf[BUFLEN], ns[1], ew[1];
   char valid;
   int op, try, res, maxtry = 20;
   unsigned int year, mon, day, hour, min, sec;
@@ -227,7 +227,7 @@ int main(int ac, char **av)
       
       res = sscanf(buf, 
 		   "$GPRMC,%2d%2d%2d.%3c,%1c,%f,%1c,%f,%1c,%f,%f,%2d%2d%2d",
-		   &hour, &min, &sec, foo, &valid, &lat, c,  &longi, c, &speed, &course, &day, &mon, &year);
+		   &hour, &min, &sec, foo, &valid, &lat, ns,  &longi, ew, &speed, &course, &day, &mon, &year);
       
       if(res == 14 && valid == 'A') {
 	
@@ -237,7 +237,13 @@ int main(int ac, char **av)
 	}
 
 	if( position_mode) {
-	  printf("LON=%f LAT=%f\n", lat/100, longi/100);
+	  lat = lat/100;
+	  if(ns[1] == 'S')
+	    lat = -lat;
+
+	  if(ew[1] == 'E')
+	    longi = -longi;
+	  printf("LON=%f LAT=%f\n", lat, longi);
 	  done = 1;
 	}
 
@@ -312,5 +318,19 @@ RMC  = Recommended Minimum Specific GPS/TRANSIT Data
 10   = Magnetic variation degrees (Easterly var. subtracts from true course)
 11   = E or W
 12   = Checksum
+
+
+From Wikipedia.
+
+Decimal degrees (DD) express latitude and longitude geographic coordinates as 
+decimal fractions and are used in many geographic information systems (GIS), 
+web mapping applications such as Google Maps, and GPS devices. Decimal degrees 
+are an alternative to using degrees, minutes, and seconds (DMS). As with latitude 
+and longitude, the values are bounded by ±90° and ±180° respectively.
+
+Positive latitudes are north of the equator, negative latitudes are south of the 
+equator. Positive longitudes are east of Prime Meridian, negative longitudes are 
+west of the Prime Meridian. Latitude and longitude are usually expressed in that 
+sequence, latitude before longitude.
 
 */
