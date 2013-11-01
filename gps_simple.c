@@ -246,9 +246,7 @@ int main(int ac, char **av)
 	  if(ew == 'E')
 	    longi = -longi;
 	  
-	  printf("NS=%c, EW=%c\n", ns, ew);
-
-	  printf("LON=%f LAT=%f\n", lat, longi);
+	  printf("LAT=%f LON=%f\n", lat, longi);
 	  done = 1;
 	}
 
