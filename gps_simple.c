@@ -24,7 +24,7 @@
 #include "devtag-allinone.h"
 
 #define BUFLEN  124
-#define VERSION "1.1 2013-10-15"
+#define VERSION "1.2 2013-11-01"
 #define KNOT_TO_KMPH 1.852 
 
 
