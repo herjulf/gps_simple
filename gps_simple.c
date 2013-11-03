@@ -232,21 +232,19 @@ int main(int ac, char **av)
       if(res == 14 && valid == 'A') {
 	
 	if( velocity_mode) {
-	  printf("Speed=%6.2f\n", speed * KNOT_TO_KMPH);
+	  printf("Speed=%08.4f\n", speed * KNOT_TO_KMPH);
 	  done = 1;
 	}
 
 	if( position_mode) {
 
-	  lat = lat/100;
 	  if(ns == 'S')
 	    lat = -lat;
 
-	  longi = longi/100;
 	  if(ew == 'W')
 	    longi = -longi;
 	  
-	  printf("LAT=%f LON=%f\n", lat, longi);
+	  printf("LAT=%f LON=%09.4f\n", lat, longi);
 	  done = 1;
 	}
 
