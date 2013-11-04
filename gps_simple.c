@@ -243,8 +243,15 @@ int main(int ac, char **av)
 
 	  if(ew == 'W')
 	    longi = -longi;
+
+	  /*
+	  LAT  -90  -- +90 
+
+          LON -180 -- +180
 	  
-	  printf("LAT=%09.4f LON=%09.4f\n", lat, longi);
+	  */
+
+	  printf("LAT=%08.4f LON=%09.4f\n", lat, longi);
 	  done = 1;
 	}
 
